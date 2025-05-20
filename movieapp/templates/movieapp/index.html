@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies Collection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .movie-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+        }
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .movie-title {
+            font-size: 1.2rem;
+            margin: 10px 0 5px;
+        }
+        .movie-meta {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Movies Collection</h1>
+
+    <!-- 🔍 Search Form -->
+    <form method="get" style="text-align:center; margin-bottom:20px;">
+        <input type="text" name="hero" placeholder="Search by Hero">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- 🎥 Movie Cards Grid -->
+    <div class="movie-grid">
+        {% for movie in MOVIES_list %}
+        <div class="movie-card">
+            {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.moviename }}">
+            {% else %}
+                <img src="https://via.placeholder.com/250x300?text=No+Poster" alt="No Poster">
+            {% endif %}
+            <div class="movie-title">{{ movie.moviename }}</div>
+            <div class="movie-meta">
+                Hero: {{ movie.hero }} <br>
+                Heroine: {{ movie.heroine }} <br>
+                Release: {{ movie.rdate }} <br>
+                ⭐ Rating: {{ movie.rating }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>

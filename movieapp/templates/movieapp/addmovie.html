@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Movie</button>
+    </form>
+    <h1>MOVIES INFORMATION</h1>
+
+    {% if MOVIES_list %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Released Date</th>
+                <th>Movie Name</th>
+                <th>Hero</th>
+                <th>Heroine</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in MOVIES_list %}
+            <tr>
+                <td>{{ movie.rdate }}</td>
+                <td>{{ movie.moviename }}</td>
+                <td>{{ movie.hero }}</td>
+                <td>{{ movie.heroine }}</td>
+                <td>{{ movie.rating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No records found</p>
+    {% endif %}
+</body>
+</html>
